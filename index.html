@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavita Import Tool</title>
+  <script type="module" src="/src/main.ts" defer></script>
+</head>
+
+<body>
+  <section class="container" id="home">
+    <h1>Kavita Import Tool</h1>
+
+    <p>
+      Select or drop eBook files to get started.
+    </p>
+
+    <div class="row">
+      <button id="import-btn">Select Files</button>
+      <button id="to-processing-btn" disabled>Next</button>
+    </div>
+
+    <ul id="files-list"></ul>
+
+    <a href="https://kavitaimporttool.mackenly.com" target="_blank" rel="noopener noreferrer">
+      About and Help
+    </a>
+    <a href="https://github.com/mackenly/kavita-import-tool" target="_blank" rel="noopener noreferrer">
+      GitHub / Bugs / Feature Requests
+    </a>
+
+  </section>
+
+  <section class="container hidden" id="processing">
+    <h1>Options</h1>
+
+    <p>
+      Select the options you would like to apply to the imported files.
+    </p>
+
+    <div class="row">
+      <label for="perfered-format">Perfered Format</label>
+      <select id="perfered-format">
+        <option value="epub">EPUB</option>
+        <option value="mobi">MOBI</option>
+        <option value="pdf">PDF</option>
+      </select>
+      <button class="help" aria-label="Help"
+        data-message="If there are multiple files with the same name, but different formats, the selected format will be used and the others ignored.">
+        ❔
+      </button>
+    </div>
+    <div class="row">
+      <label for="export-in-file">Export in File <input type="checkbox" id="export-in-file" checked /></label>
+      <button class="help" aria-label="Help"
+        data-message="Places all of the outputs in a file rather than directly in the selected folder.">
+        ❔
+      </button>
+    </div>
+    <div class="row">
+      <button id="to-import-btn">Back</button>
+      <button id="to-export-btn">Run</button>
+    </div>
+  </section>
+
+  <section class="container hidden" id="export">
+    <h1>Processing</h1>
+
+    <div id="export-result">
+      <p>
+        Please wait while the files are being processed.
+      </p>
+    </div>
+  </section>
+
+</body>
+
+</html>
