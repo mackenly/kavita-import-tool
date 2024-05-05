@@ -11,17 +11,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+
             - name: Setup Rust
               uses: actions-rs/toolchain@v1
               with:
                   toolchain: stable
                   override: true
-            - name: Change directory
-              run: cd ./src-tauri/
+
             - name: Install dependencies
               run: cargo build --verbose
+              working-directory: ./src-tauri/
+              
             - name: Run tests
               run: cargo test --verbose
+              working-directory: ./src-tauri/
 
     npm-test:
         timeout-minutes: 10
