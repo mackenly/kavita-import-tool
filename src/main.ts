@@ -97,9 +97,9 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-var selectedFiles: Array<string> = [];
+export var selectedFiles: Array<string> = [];
 
-function renderFiles() {
+export function renderFiles() {
   selectedFiles = [...new Set(selectedFiles)];
   const filesList = document.querySelector("#files-list");
   if (filesList) {
