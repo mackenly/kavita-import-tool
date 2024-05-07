@@ -1,5 +1,7 @@
 # Kavita Import Tool
 
+[![test](https://github.com/mackenly/kavita-import-tool/actions/workflows/test.yml/badge.svg)](https://github.com/mackenly/kavita-import-tool/actions/workflows/test.yml)
+
 <img src="./app-icon.png" width="100" height="100">
 
 ## Description
