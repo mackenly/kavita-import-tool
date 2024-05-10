@@ -1,0 +1,7 @@
+name = "kavita-import-tool-docs"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2024-05-07"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+compatibility_date = "2024-05-07"
