@@ -18,7 +18,12 @@ kavita-import-tool-output-[epoch time]
           ┖── DesigningMultimediaPipelinesWithGStreamer.mobi
 ```
 
-## Installation
+## Documentation / Installation
+Read the docs at [kavitaimporttool.mackenly.com](https://kavitaimporttool.mackenly.com/)
+
+[Read the Quickstart Guide](https://kavitaimporttool.mackenly.com/quickstart) for a step-by-step guide on how to install and use the program.
+
+TL;DR:
 - Download the latest release from the [releases page](https://github.com/mackenly/kavita-import-tool/releases) for your operating system
 - Install the program (not currently signed, so you may need to allow the installation)
 
