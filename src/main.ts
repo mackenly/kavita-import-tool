@@ -2,8 +2,16 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { listen } from "@tauri-apps/api/event";
 import { open, message } from '@tauri-apps/api/dialog';
 import { downloadDir } from '@tauri-apps/api/path';
+import { getVersion } from '@tauri-apps/api/app';
 
 window.addEventListener("DOMContentLoaded", () => {
+  getVersion().then((version) => {
+    const versionP = document.querySelector("#version");
+    if (versionP) {
+      versionP.textContent = 'Version ' + version;
+    }
+  });
+
   document.querySelector("#import-btn")?.addEventListener("click", async () => {
     open({
       multiple: true,
