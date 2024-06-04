@@ -15,7 +15,7 @@ updates:
     schedule:
       interval: "monthly"
 
-  - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: "pnpm" # See documentation for possible values
     directory: "/docs" # Location of package manifests
     schedule:
       interval: "monthly"
