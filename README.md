@@ -48,4 +48,4 @@ TL;DR:
 
 
 ## Disclaimer
-Not associated with Kavita in any way. This is a tool for creating the correct file structure for Kavita. This project is licensed under [AGPL-3.0](./LICENSE) license. AGPL-3.0 is a copyleft license that requires modifications to be released under the same license. Additionally, there is no warranty, and the software is provided as is. Contributors are not responsible for any damages or losses arising from the use of the software. Copyright 2024 Tricities Media Group, LLC.
+Not associated with Kavita in any way. This is a tool for creating the correct file structure for Kavita. This project is licensed under [AGPL-3.0](./LICENSE) license. AGPL-3.0 is a copyleft license that requires modifications to be released under the same license. Additionally, there is no warranty, and the software is provided as is. Contributors are not responsible for any damages or losses arising from the use of the software. Copyright 2024 Tricities Media Group LLC.
