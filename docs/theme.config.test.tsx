@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import config from './theme.config';
-import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 

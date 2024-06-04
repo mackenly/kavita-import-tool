@@ -1,5 +1,4 @@
 import { describe, it, expect } from "vitest";
-const withNextra = require('nextra');
 
 describe('next.config', () => {
     it('should export withNextra', () => {
