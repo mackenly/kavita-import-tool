@@ -1,0 +1,31 @@
+name: Doc Test
+
+on:
+  push:
+    paths:
+      - '"docs/**/*"'
+  pull_request:
+    paths:
+      - '"docs/**/*"'
+  workflow_dispatch:
+
+jobs:
+    npm-test:
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                node-version: lts/*
+                cache: 'npm' # Set this to npm, yarn or pnpm.
+
+            - name: Install dependencies
+              run: npm install
+              working-directory: ./docs/
+
+            - name: Run tests
+              run: npm test
+              working-directory: ./docs/
