@@ -29,9 +29,8 @@ jobs:
       - name: Update Cargo.toml version
         run: |
           # get version and remove the v prefix
-          echo ::set-output name=newTagNum::$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
-          sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'${{ steps.versioning.outputs.newTagNum }}'"/' Cargo.toml
-        working-directory: ./src-tauri
+          export newTagNum=$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
+          sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'$newTagNum'"/' src-tauri/Cargo.toml
 
       - name: Commit and tag version
         run: |
