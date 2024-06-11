@@ -1,15 +1,10 @@
-name: 'release'
+name: Release
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'README.md'
-      - '.vscode/**'
-      - 'coverage/**'
-      - 'docs/**'
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["App Test"]
+    types:
+      - completed
 
 jobs:
   publish-tauri:
@@ -17,7 +12,7 @@ jobs:
     permissions:
       contents: write
     # ignore if commit message contains chore or ci
-    if: ${{ !contains(github.event.head_commit.message, 'ci') && !contains(github.event.head_commit.message, 'chore') }}
+    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     strategy:
       fail-fast: false
       matrix:
@@ -64,7 +59,7 @@ jobs:
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
         run: npm install # change this to npm or pnpm depending on which one you use.
 
-      - name: Bump version and tag commit
+      - name: Bump npm version
         id: versioning
         uses: phips28/gh-action-bump-version@master
         with:
@@ -81,7 +76,7 @@ jobs:
         run: |
           # get version and remove the v prefix
           echo ::set-output name=newTagNum::$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
-          sed -i "s/version = \"[0-9]*\.[0-9]*\.[0-9]*\"/version = \"${{ steps.versioning.outputs.newTagNum }}\"/" src-tauri/Cargo.toml
+          sed -i "s/version = \"[0-9]*\.[0-9]*\.[0-9]*\"/version = \"${{ steps.versioning.outputs.newTagNum }}\"/" Cargo.toml
         working-directory: ./src-tauri
 
       - name: Commit and tag version
