@@ -12,8 +12,8 @@ on:
 jobs:
     cargo-test:
         timeout-minutes: 10
-        # ignore if commit message contains [skip ci], chore, or ci
-        if: '!(contains(github.event.head_commit.message, "[skip ci]") || contains(github.event.head_commit.message, "chore") || contains(github.event.head_commit.message, "ci"))'
+        # ignore if commit message contains chore or ci
+        if: ${{ !contains(github.event.head_commit.message, 'ci') && !contains(github.event.head_commit.message, 'chore') }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
