@@ -36,13 +36,20 @@ jobs:
             echo "Error: The new version is not a semantic version"
             exit 1
           fi
+          # Update Cargo.toml
           sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'$newTagNum'"/' src-tauri/Cargo.toml
+          # Update tauri.conf.json
+          sed -i 's/"version": "[0-9]\+\.[0-9]\+\.[0-9]"/"version": "'$newTagNum'"/' src-tauri/tauri.conf.json
+          # Make sure Cargo.lock is updated
+          cargo build --manifest-path src-tauri/Cargo.toml
 
       - name: Commit and tag version
         run: |
           git config --local user.email "no-reply@tricitiesmediagroup.com"
           git config --local user.name "Versioning Bot"
           git add src-tauri/Cargo.toml
+          git add src-tauri/Cargo.lock
+          git add src-tauri/tauri.conf.json
           git add package.json
           git commit -m "chore: release ${{ steps.versioning.outputs.newTag }}"
           git push
