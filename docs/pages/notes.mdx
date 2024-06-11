@@ -2,11 +2,13 @@
 These are some notes that I have taken while developing the Kavita Import Tool. 
 They are mostly for my reference, but may be useful if you are looking to contribute to the project.
 
+App is currently on Tauri v1. v2's docs are still incomplete so holding off on that.
+
 ## Kavita's Supported files
 Link: [Disucssion link](https://github.com/Kareadita/Kavita/discussions/2949#discussioncomment-9693479)
 
-Contents:
-```
+Contents ([from here](https://github.com/Kareadita/Kavita/blob/094e775f0b2b1e7a7001928b5e68be86b33b90b1/API/Services/Tasks/Scanner/Parser/Parser.cs#L16)):
+```cs
 public const string ImageFileExtensions = @"^(\.png|\.jpeg|\.jpg|\.webp|\.gif|\.avif)"; 
     public const string ArchiveFileExtensions = @"\.cbz|\.zip|\.rar|\.cbr|\.tar.gz|\.7zip|\.7z|\.cb7|\.cbt";
     public const string EpubFileExtension = @"\.epub";
@@ -14,16 +16,17 @@ public const string ImageFileExtensions = @"^(\.png|\.jpeg|\.jpg|\.webp|\.gif|\.
 ```
 
 ## Update Server 
-Using [mackenly/tauri-upade-cloudflare](https://github.com/mackenly/tauri-update-cloudflare/) hosted by TMG
+Using [mackenly/tauri-update-cloudflare](https://github.com/mackenly/tauri-update-cloudflare/) hosted by TMG
 
 Checks: https://updates.kavitaimporttool.mackenly.com/v1/{{target}}/{{arch}}/{{current_version}}
 
 Even if the URL is changed, this one should be kept or redirected so that old versions can still check for updates.
 
 
-## To Update the Version
-Only the project maintainer should update the version.
-1. Update the version in `tauri.conf.json`
-2. Update the version in `Cargo.toml`
-3. Commit the changes and let the CI/CD create a prerelease
-4. Once the release is created, update the release to a full release for production distribution
+## Version updates
+Version updates and deployments happen automatically on `main`. To control the synmantic versioning, there's special keywords that can be used in the commit messages:
+```bash
+patch-wording: 'bump-patch,fixes,Fixes,bugfix,Bugfix,patch,hotfix,Hotfix'
+minor-wording: 'bump-minor,adds,Adds,new'
+major-wording: 'bump-major,MAJOR,removes,Removes,delete,Delete'
+```
