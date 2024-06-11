@@ -35,6 +35,11 @@ jobs:
                   toolchain: stable
                   override: true
 
+            - name: Rust cache
+              uses: swatinem/rust-cache@v2
+              with:
+                workspaces: './src-tauri -> target'
+
             - name: Install dependencies
               run: cargo build --verbose
               working-directory: ./src-tauri/

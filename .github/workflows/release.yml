@@ -7,6 +7,46 @@ on:
       - completed
 
 jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+    # ignore if commit message contains chore or ci
+    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump npm version
+        uses: phips28/gh-action-bump-version@master
+        with:
+            tag-prefix: 'v'
+            patch-wording: 'bump-patch,fixes,Fixes,bugfix,Bugfix,patch,hotfix,Hotfix'
+            minor-wording: 'bump-minor,adds,Adds,new'
+            major-wording: 'bump-major,MAJOR,removes,Removes,delete,Delete'
+            skip-commit: true
+            skip-tag: true
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Cargo.toml version
+        run: |
+          # get version and remove the v prefix
+          echo ::set-output name=newTagNum::$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
+          sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'${{ steps.versioning.outputs.newTagNum }}'"/' Cargo.toml
+        working-directory: ./src-tauri
+
+      - name: Commit and tag version
+        run: |
+          git config --local user.email "no-reply@tricitiesmediagroup.com"
+          git config --local user.name "Versioning Bot"
+          git add src-tauri/Cargo.toml
+          git add package.json
+          git commit -m "chore: release ${{ steps.versioning.outputs.newTag }}"
+          git push
+
+      - name: Commit and tag version
+        run: |
+          git tag -a ${{ steps.versioning.outputs.newTag }} -m "Release ${{ steps.versioning.outputs.newTag }}"
+          git push --follow-tags
+            
   publish-tauri:
     timeout-minutes: 15
     permissions:
@@ -58,42 +98,6 @@ jobs:
       - name: install frontend dependencies
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
         run: npm install # change this to npm or pnpm depending on which one you use.
-
-      - name: Bump npm version
-        id: versioning
-        uses: phips28/gh-action-bump-version@master
-        with:
-            tag-prefix: 'v'
-            patch-wording: 'bump-patch,fixes,Fixes,bugfix,Bugfix,patch,hotfix,Hotfix'
-            minor-wording: 'bump-minor,adds,Adds,new'
-            major-wording: 'bump-major,MAJOR,removes,Removes,delete,Delete'
-            skip-commit: true
-            skip-tag: true
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Update Cargo.toml version
-        run: |
-          # get version and remove the v prefix
-          echo ::set-output name=newTagNum::$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
-          sed -i "s/version = \"[0-9]*\.[0-9]*\.[0-9]*\"/version = \"${{ steps.versioning.outputs.newTagNum }}\"/" Cargo.toml
-        working-directory: ./src-tauri
-
-      - name: Commit and tag version
-        run: |
-          git config --local user.email "no-reply@tricitiesmediagroup.com"
-          git config --local user.name "Versioning Bot"
-          git add src-tauri/Cargo.toml
-          git add package.json
-          git commit -m "chore: release v${{ steps.versioning.outputs.newTag }}"
-          git push
-        working-directory: ./
-
-      - name: Tag changes
-        run: |
-          git tag -a ${{ steps.versioning.outputs.newTag }} -m "Release ${{ steps.versioning.outputs.newTag }}"
-          git push origin v${{ steps.versioning.outputs.newTag }}
-        working-directory: ./
 
       - uses: tauri-apps/tauri-action@v0
         env:
