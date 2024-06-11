@@ -15,6 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Bump npm version
+        id: versioning
         uses: phips28/gh-action-bump-version@master
         with:
             tag-prefix: 'v'
@@ -30,6 +31,11 @@ jobs:
         run: |
           # get version and remove the v prefix
           export newTagNum=$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
+          # if not a semver throw an error
+          if ! [[ $newTagNum =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: The new version is not a semantic version"
+            exit 1
+          fi
           sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'$newTagNum'"/' src-tauri/Cargo.toml
 
       - name: Commit and tag version
@@ -47,11 +53,12 @@ jobs:
           git push --follow-tags
             
   publish-tauri:
+    needs: version-bump
     timeout-minutes: 15
     permissions:
       contents: write
-    # ignore if commit message contains chore or ci
-    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+    # ignore if commit message contains chore or ci and make sure version bump job passed
+    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' && github.event.workflow_run.jobs.version-bump.conclusion == 'success' }}
     strategy:
       fail-fast: false
       matrix:
