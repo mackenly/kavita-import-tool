@@ -7,12 +7,14 @@ on:
       - '"**/*.mdx"'
       - '.vscode/**'
       - 'coverage/**'
+      - 'docs/**'
   pull_request:
     paths-ignore:
       - '"**/*.md"'
       - '"**/*.mdx"'
       - '.vscode/**'
       - 'coverage/**'
+      - 'docs/**'
   workflow_dispatch:
 
 jobs:
