@@ -1,5 +1,5 @@
 /// # Arguments
-/// * `preferred` - A string of the preferred file type (epub, mobi, pdf)
+/// * `preferred` - A string of the preferred file type (epub, pdf)
 /// # Returns
 /// * A vector of file types in order of preference
 /// # Example
@@ -9,10 +9,9 @@
 /// ```
 pub fn get_preferred_vector(preferred: String) -> Vec<&'static str> {
     let preferred_type_order: Vec<&str> = match preferred.as_str() {
-        "epub" => vec!["epub", "mobi", "pdf"],
-        "mobi" => vec!["mobi", "epub", "pdf"],
-        "pdf" => vec!["pdf", "epub", "mobi"],
-        _ => vec!["epub", "mobi", "pdf"],
+        "epub" => vec!["epub", "pdf"],
+        "pdf" => vec!["pdf", "epub"],
+        _ => vec!["epub", "pdf"],
     };
     preferred_type_order
 }
@@ -24,7 +23,7 @@ pub fn get_preferred_vector(preferred: String) -> Vec<&'static str> {
 /// * A hashmap of grouped files
 /// # Example
 /// ```
-/// let files: Vec<String> = vec!["file1.epub", "file2.epub", "file2.mobi", "file2.pdf"];
+/// let files: Vec<String> = vec!["file1.epub", "file2.epub", "file2.cbz", "file2.pdf"];
 /// let grouped_files: std::collections::HashMap<String, Vec<String>> = group_files(files);
 /// ```
 pub fn group_files(files: Vec<String>) -> std::collections::HashMap<String, Vec<String>> {
@@ -58,32 +57,25 @@ mod tests {
     fn test_get_preferred_vector_epub() {
         let preferred: String = "epub".to_string();
         let preferred_type_order: Vec<&str> = get_preferred_vector(preferred);
-        assert_eq!(preferred_type_order, vec!["epub", "mobi", "pdf"]);
-    }
-
-    #[test]
-    fn test_get_preferred_vector_mobi() {
-        let preferred: String = "mobi".to_string();
-        let preferred_type_order: Vec<&str> = get_preferred_vector(preferred);
-        assert_eq!(preferred_type_order, vec!["mobi", "epub", "pdf"]);
+        assert_eq!(preferred_type_order, vec!["epub", "pdf"]);
     }
 
     #[test]
     fn test_get_preferred_vector_pdf() {
         let preferred: String = "pdf".to_string();
         let preferred_type_order: Vec<&str> = get_preferred_vector(preferred);
-        assert_eq!(preferred_type_order, vec!["pdf", "epub", "mobi"]);
+        assert_eq!(preferred_type_order, vec!["pdf", "epub"]);
     }
 
     #[test]
     fn test_group_files() {
-        let files: Vec<String> = vec!["file1.epub".to_string(), "file2.epub".to_string(), "file2.mobi".to_string(), "file2.pdf".to_string()];
+        let files: Vec<String> = vec!["file1.epub".to_string(), "file2.epub".to_string(), "file2.pdf".to_string()];
         let grouped_files: std::collections::HashMap<String, Vec<String>> = group_files(files);
         assert_eq!(grouped_files.len(), 2);
         assert_eq!(grouped_files.get("file1").unwrap(), &vec!["file1.epub"]);
         assert_eq!(
             grouped_files.get("file2").unwrap(),
-            &vec!["file2.epub", "file2.mobi", "file2.pdf"]
+            &vec!["file2.epub", "file2.pdf"]
         );
     }
 

@@ -15,7 +15,7 @@ kavita-import-tool-output-[epoch time]
       RustForTypeScriptDevelopers
           ┖── RustForTypeScriptDevelopers.pdf
       DesigningMultimediaPipelinesWithGStreamer
-          ┖── DesigningMultimediaPipelinesWithGStreamer.mobi
+          ┖── DesigningMultimediaPipelinesWithGStreamer.cbz
 ```
 
 ## Documentation / Installation
@@ -30,7 +30,6 @@ TL;DR:
 ## Features / Roadmap
 - [x] Import EPUB files
 - [x] Import PDF files
-- [x] Import MOBI files
 - [ ] Support other files types such as Manga ones (this needs feedback/feature request)
 - [x] Select file based on a ranked list of formats
 - [x] Allow users to select the preferred format to use
