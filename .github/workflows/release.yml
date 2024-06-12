@@ -11,9 +11,9 @@ on:
 jobs:
   version-bump:
     runs-on: ubuntu-latest
-    # ignore if commit message contains chore or ci
-    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     timeout-minutes: 5
+    # ignore if commit message contains chore or ci and make sure version bump job passed
+    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v4
 

@@ -44,9 +44,29 @@
     <div class="row">
       <label for="perfered-format">Perfered Format</label>
       <select id="perfered-format">
-        <option value="epub">EPUB</option>
-        <option value="mobi">MOBI</option>
-        <option value="pdf">PDF</option>
+        <optgroup label="eBook">
+          <option value="epub">EPUB</option>
+          <option value="pdf">PDF</option>
+        </optgroup>
+        <optgroup label="Comic">
+          <option value="cbz">CBZ</option>
+          <option value="zip">ZIP</option>
+          <option value="rar">RAR</option>
+          <option value="cbr">CBR</option>
+          <option value="tar.gz">TAR.GZ</option>
+          <option value="7zip">7ZIP</option>
+          <option value="7z">7Z</option>
+          <option value="cb7">CB7</option>
+          <option value="cbt">CBT</option>
+        </optgroup>
+        <optgroup label="Image">
+          <option value="png">PNG</option>
+          <option value="jpeg">JPEG</option>
+          <option value="jpg">JPG</option>
+          <option value="webp">WEBP</option>
+          <option value="gif">GIF</option>
+          <option value="avif">AVIF</option>
+        </optgroup>
       </select>
       <button class="help" aria-label="Help"
         data-message="If there are multiple files with the same name, but different formats, the selected format will be used and the others ignored.">
