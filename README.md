@@ -20,6 +20,8 @@ kavita-import-tool-output-[epoch time]
           ┖── DesigningMultimediaPipelinesWithGStreamer.cbz
 ```
 
+Supports: `epub`, `pdf`, `cbz`, `zip`, `rar`, `cbr`, `tar.gz`, `7zip`, `7z`, `cb7`, `cbt`, `png`, `jpeg`, `jpg`, `webp`, `gif`, and `avif`
+
 ## Documentation / Installation
 Read the docs at [kavitaimporttool.mackenly.com](https://kavitaimporttool.mackenly.com/)
 

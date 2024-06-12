@@ -15,8 +15,28 @@
 }
 
 html.file-drag-hover {
-	background-color: #e8e8e8;
-	opacity: 0.9;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	.container {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+
+	&::before {
+		content: '✅ Drop your files here';
+		font-size: 1em;
+		box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: max-content;
+		padding: 1em 2em;
+		border-radius: 8px;
+		background-color: #1d1d1d;
+		color: #ffffff;
+		z-index: 9999;
+	}
 }
 
 .container {
