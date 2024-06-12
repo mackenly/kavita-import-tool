@@ -1,7 +1,12 @@
 name: Release
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["App Test"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   version-bump:
