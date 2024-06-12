@@ -5,6 +5,8 @@ on:
     workflows: ["App Test"]
     types:
       - completed
+    branches:
+      - main
 
 jobs:
   version-bump:
