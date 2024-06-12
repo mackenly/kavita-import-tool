@@ -5,7 +5,9 @@
 <img src="./app-icon.png" width="100" height="100">
 
 ## Description
-Kavita Import Tool allows users to import a variety of eBook files and export them into the correct [folder structure for Kavita](https://wiki.kavitareader.com/guides/scanner/managefiles). When multiple files are imported with the same name, the program picks the best format or the format selected by the user.
+Kavita Import Tool allows users to import a variety of eBook, manga, and image files and export them into the correct [folder structure for Kavita](https://wiki.kavitareader.com/guides/scanner/managefiles). When multiple files are imported with the same name, the program picks the best format or the format selected by the user.
+
+The tool currently supports simple file name-based structures like the one below. If you have a different structure you would like to see supported, please [create an issue](https://gitub.com/mackenly/kavita-import-tool/issues/new) with the details.
 
 Example folder structure:
 ```
@@ -30,21 +32,22 @@ TL;DR:
 ## Features / Roadmap
 - [x] Import EPUB files
 - [x] Import PDF files
-- [ ] Support other files types such as Manga ones (this needs feedback/feature request)
+- [x] Support for all file types supported by Kavita
 - [x] Select file based on a ranked list of formats
 - [x] Allow users to select the preferred format to use
 - [x] Export directly into the selected output folder or into a container folder for manual import
 - [x] Drag and drop or select files to import
 - [x] Automatic updates
+- [ ] Support for episodic and series-based content following the Kavita format
 - [ ] Your feature idea here! [Create an issue](https://github.com/mackenly/kavita-import-tool/issues/new) to suggest a feature
 
 ## Development Setup
 - Clone the repository
-- Ensure Rust and cargo is installed and setup 
+- Ensure Rust and cargo are installed and setup 
 - Run `npm install` to install dependencies
 - Install Rust dependencies by running `cargo build`
 - Run `npm run tauri dev` to start the development server and open the program in a window
 
 
 ## Disclaimer
-Not associated with Kavita in any way. This is a tool for creating the correct file structure for Kavita. This project is licensed under [AGPL-3.0](./LICENSE) license. AGPL-3.0 is a copyleft license that requires modifications to be released under the same license. Additionally, there is no warranty, and the software is provided as is. Contributors are not responsible for any damages or losses arising from the use of the software. Copyright 2024 Tricities Media Group LLC.
+Not associated with Kavita. This is a tool for creating the correct file structure for Kavita. This project is licensed under [AGPL-3.0](./LICENSE) license. AGPL-3.0 is a copyleft license that requires modifications to be released under the same license. Additionally, there is no warranty, and the software is provided as is. Contributors are not responsible for any damages or losses arising from the use of the software. Copyright 2024 Tricities Media Group LLC.
