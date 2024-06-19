@@ -1,88 +1,14 @@
-name: Release
+name: Build and Release
 
 on:
-  workflow_run:
-    workflows: ["App Test"]
-    types:
-      - completed
-    branches:
-      - main
+  workflow_dispatch:
 
-jobs:
-  version-bump:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    # ignore if commit message contains chore or ci and make sure version bump job passed
-    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: install dependencies (ubuntu only)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-        # webkitgtk 4.0 is for Tauri v1 - webkitgtk 4.1 is for Tauri v2.
-        # You can remove the one that doesn't apply to your app to speed up the workflow a bit.
-
-      - uses: dtolnay/rust-toolchain@stable
-
-      - name: Rust cache
-        uses: swatinem/rust-cache@v2
-        with:
-          workspaces: './src-tauri -> target'
-
-      - name: Bump npm version
-        id: versioning
-        uses: phips28/gh-action-bump-version@master
-        with:
-            tag-prefix: 'v'
-            patch-wording: 'bump-patch,fixes,Fixes,bugfix,Bugfix,patch,hotfix,Hotfix'
-            minor-wording: 'bump-minor,adds,Adds,new'
-            major-wording: 'bump-major,MAJOR,removes,Removes,delete,Delete'
-            skip-commit: true
-            skip-tag: true
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update Cargo.toml version
-        run: |
-          # get version and remove the v prefix
-          export newTagNum=$(echo ${{ steps.versioning.outputs.newTag }} | sed 's/v//')
-          # if not a semver throw an error
-          if ! [[ $newTagNum =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Error: The new version is not a semantic version"
-            exit 1
-          fi
-          # Update Cargo.toml
-          sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'$newTagNum'"/' src-tauri/Cargo.toml
-          # Update tauri.conf.json
-          sed -i 's/"version": "[0-9]\+\.[0-9]\+\.[0-9]"/"version": "'$newTagNum'"/' src-tauri/tauri.conf.json
-          # Make sure Cargo.lock is updated
-          cargo build --manifest-path src-tauri/Cargo.toml
-
-      - name: Commit and tag version
-        run: |
-          git config --local user.email "no-reply@tricitiesmediagroup.com"
-          git config --local user.name "Versioning Bot"
-          git add src-tauri/Cargo.toml
-          git add src-tauri/Cargo.lock
-          git add src-tauri/tauri.conf.json
-          git add package.json
-          git commit -m "chore: release ${{ steps.versioning.outputs.newTag }}"
-          git push
-
-      - name: Commit and tag version
-        run: |
-          git tag -a ${{ steps.versioning.outputs.newTag }} -m "Release ${{ steps.versioning.outputs.newTag }}"
-          git push --follow-tags
-            
+jobs:       
   publish-tauri:
-    needs: version-bump
     timeout-minutes: 15
     permissions:
       contents: write
-    # ignore if commit message contains chore or ci and make sure version bump job passed
-    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     strategy:
       fail-fast: false
       matrix:
@@ -99,8 +25,6 @@ jobs:
     runs-on: ${{ matrix.settings.platform }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: install dependencies (ubuntu only)
         if: matrix.settings.platform == 'ubuntu-22.04' # This must match the platform value defined above.
@@ -140,6 +64,44 @@ jobs:
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: 'v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
-          releaseDraft: false
+          releaseDraft: true
           prerelease: false
           args: ${{ matrix.settings.args }}
+
+  publish-release:
+    needs: publish-tauri
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get Version
+        id: get_version
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const tauriConfig = JSON.parse(fs.readFileSync('src-tauri/tauri.conf.json', 'utf8'));
+            const version = tauriConfig.package.version;
+            core.setOutput('version', version);
+
+      - name: Get Release
+        id: get_release
+        uses: cardinalby/git-get-release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: v${{ steps.get_version.outputs.version }}
+
+      - name: Publish Release
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ steps.get_release.outputs.id }},
+              draft: false,
+              prerelease: false
+            })
