@@ -56,7 +56,7 @@ jobs:
           # Update Cargo.toml
           sed -i 's/version = "[0-9]\+\.[0-9]\+\.[0-9]\+"/version = "'$newTagNum'"/' src-tauri/Cargo.toml
           # Update tauri.conf.json
-          sed -i 's/"version": "[0-9]\+\.[0-9]\+\.[0-9]"/"version": "'$newTagNum'"/' src-tauri/tauri.conf.json
+          sed -i 's/"version": "[0-9.]\+"/"version": "'"$newTagNum"'"/' src-tauri/tauri.conf.json
           # Make sure Cargo.lock is updated
           cargo build --manifest-path src-tauri/Cargo.toml
 
