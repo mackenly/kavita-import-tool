@@ -178,7 +178,7 @@ li.file {
 		border-color: #396cd8;
 	}
 
-	&button {
+	& button {
 		padding: 0.5em 1em;
 		background: none;
 		box-shadow: none;
