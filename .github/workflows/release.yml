@@ -85,23 +85,43 @@ jobs:
             const version = tauriConfig.package.version;
             core.setOutput('version', version);
 
-      - name: Get Release
-        id: get_release
-        uses: cardinalby/git-get-release-action@v1
+      - name: Get Release ID
+        id: get_release_id
+        uses: actions/github-script@v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get_version.outputs.version }}
         with:
-          tag: v${{ steps.get_version.outputs.version }}
+          script: |
+            const tag = `v${process.env.VERSION}`;
+            console.log(`Searching for release with tag: ${tag}`);
+            
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            
+            const draft = releases.find(release => release.tag_name === tag && release.draft);
+            
+            if (draft) {
+              console.log(`Found draft release with ID: ${draft.id}`);
+              return draft.id;
+            } else {
+              console.log(`No draft release found for tag: ${tag}`);
+              throw new Error(`No draft release found for tag: ${tag}`);
+            }
 
       - name: Publish Release
         uses: actions/github-script@v6
+        env:
+          RELEASE_ID: ${{ steps.get_release_id.outputs.result }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: ${{ steps.get_release.outputs.id }},
+              release_id: process.env.RELEASE_ID,
               draft: false,
               prerelease: false
             })
