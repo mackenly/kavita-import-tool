@@ -1,6 +1,6 @@
 [package]
 name = "kavita-import-tool"
-version = "0.1.20"
+version = "0.1.21"
 description = "A tool for creating Kavita folder structures for eBooks"
 authors = ["mackenly"]
 edition = "2021"
