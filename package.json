@@ -14,7 +14,7 @@
     "coverage": "vitest --coverage"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1"
+    "@tauri-apps/api": "^2"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",
