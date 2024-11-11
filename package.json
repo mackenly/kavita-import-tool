@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
-    "test": "vitest",
+    "test": "vitest run src/",
     "cargo:test": "cd src-tauri && cargo test",
     "coverage": "vitest --coverage"
   },
