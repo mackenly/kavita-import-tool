@@ -10,22 +10,31 @@ on:
   workflow_dispatch:
 
 jobs:
-    npm-test:
+    e2e-test:
         timeout-minutes: 10
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
 
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                version: 9
+                run_install: false
+
             - name: setup node
               uses: actions/setup-node@v4
               with:
                 node-version: lts/*
-                cache: 'npm' # Set this to npm, yarn or pnpm.
 
             - name: Install dependencies
-              run: npm install
-              working-directory: ./docs/
+              run: pnpm install
+              working-directory: ./docs
 
-            - name: Run tests
-              run: npm test
-              working-directory: ./docs/
+            - name: Install playwright dependencies
+              run: npx playwright install --with-deps
+              working-directory: ./docs
+
+            - name: Run E2E tests
+              run: npm run e2e
+              working-directory: ./docs
