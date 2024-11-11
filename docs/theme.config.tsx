@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
 	},
 	docsRepositoryBase: 'https://github.com/mackenly/kavita-import-tool-docs',
 	footer: {
-		content: (
+		component: (
 			<p>
 				Kavita Import Tool is a project by{' '}
 				<a href="https://github.com/mackenly" target="_blank">
