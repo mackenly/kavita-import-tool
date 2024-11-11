@@ -1,4 +1,4 @@
-{
+export default {
   "index": "Introduction",
   "quickstart": "Quickstart",
   "about": "About",
