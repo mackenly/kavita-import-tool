@@ -19,10 +19,10 @@
   "devDependencies": {
     "@tauri-apps/cli": "^2",
     "@types/jsdom": "^21.1.7",
-    "@vitest/coverage-v8": "^2.1.6",
+    "@vitest/coverage-v8": "^2.1.8",
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.1",
+    "vite": "^6.0.2",
     "vitest": "^2.0.5"
   }
 }
