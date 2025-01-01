@@ -10,13 +10,13 @@ importers:
     dependencies:
       next:
         specifier: ^14.1.1
-        version: 14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nextra:
         specifier: latest
-        version: 3.2.5(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
+        version: 3.3.1(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: latest
-        version: 3.2.5(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@3.2.5(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.3.1(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@3.3.1(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -26,10 +26,10 @@ importers:
     devDependencies:
       '@playwright/test':
         specifier: ^1.48.2
-        version: 1.49.0
+        version: 1.49.1
       '@types/node':
-        specifier: 22.10.1
-        version: 22.10.1
+        specifier: 22.10.3
+        version: 22.10.3
       typescript:
         specifier: ^5.4.5
         version: 5.7.2
@@ -236,8 +236,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@playwright/test@1.49.0':
-    resolution: {integrity: sha512-DMulbwQURa8rNIQrf94+jPJQ4FmOVdpE5ZppRNvWVjvhC+6sOeo28r8MgIpQRYouXRtt/FCCXU7zn20jnHR4Qw==}
+  '@playwright/test@1.49.1':
+    resolution: {integrity: sha512-Ky+BVzPz8pL6PQxHqNRW1k3mIyv933LML7HktS8uik0bUXNCdPhoS/kLihiO1tMf/egaJb4IutXd7UywvXEW+g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -442,8 +442,8 @@ packages:
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
 
-  '@types/node@22.10.1':
-    resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
+  '@types/node@22.10.3':
+    resolution: {integrity: sha512-DifAyw4BkrufCILvD3ucnuN8eydUfc/C1GlyrnI+LK6543w5/L3VeVgf05o3B4fqSXP1dKYLOZsKfutpxPzZrw==}
 
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
@@ -1277,16 +1277,16 @@ packages:
       sass:
         optional: true
 
-  nextra-theme-docs@3.2.5:
-    resolution: {integrity: sha512-eF0j1VNNS1rFjZOfYqlrXISaCU3+MhZ9hhXY+TUydRlfELrFWpGzrpW6MiL7hq4JvUR7OBtHHs8+A+8AYcETBQ==}
+  nextra-theme-docs@3.3.1:
+    resolution: {integrity: sha512-P305m2UcW2IDyQhjrcAu0qpdPArikofinABslUCAyixYShsmcdDRUhIMd4QBHYru4gQuVjGWX9PhWZZCbNvzDQ==}
     peerDependencies:
       next: '>=13'
-      nextra: 3.2.5
+      nextra: 3.3.1
       react: '>=18'
       react-dom: '>=18'
 
-  nextra@3.2.5:
-    resolution: {integrity: sha512-n665DRpI/brjHXM83G5LdlbYA2nOtjaLcWJs7mZS3gkuRDmEXpJj4XJ860xrhkYZW2iYoUMu32zzhPuFByU7VA==}
+  nextra@3.3.1:
+    resolution: {integrity: sha512-jiwj+LfUPHHeAxJAEqFuglxnbjFgzAOnDWFsjv7iv3BWiX8OksDwd3I2Sv3j2zba00iIBDEPdNeylfzTtTLZVg==}
     engines: {node: '>=18'}
     peerDependencies:
       next: '>=13'
@@ -1350,13 +1350,13 @@ packages:
   pkg-types@1.2.1:
     resolution: {integrity: sha512-sQoqa8alT3nHjGuTjuKgOnvjo4cljkufdtLMnO2LBP/wRwuDlo1tkaEdMxCRhyGRPacv/ztlZgDPm2b7FAmEvw==}
 
-  playwright-core@1.49.0:
-    resolution: {integrity: sha512-R+3KKTQF3npy5GTiKH/T+kdhoJfJojjHESR1YEWhYuEKRVfVaxH3+4+GvXE5xyCngCxhxnykk0Vlah9v8fs3jA==}
+  playwright-core@1.49.1:
+    resolution: {integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.49.0:
-    resolution: {integrity: sha512-eKpmys0UFDnfNb3vfsf8Vx2LEOtflgRebl0Im2eQQnYMA4Aqd+Zw8bEOB+7ZKvN76901mRnqdsiOGKxzVTbi7A==}
+  playwright@1.49.1:
+    resolution: {integrity: sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1377,6 +1377,12 @@ packages:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
       react: ^18.3.1
+
+  react-medium-image-zoom@5.2.13:
+    resolution: {integrity: sha512-KcBL4OsoUQJgIFh6vQgt/6sRGqDy6bQBcsbhGD2tsy4B5Pw3dWrboocVOyIm76RRALEZ6Qwp3EDvIvfEv0m5sg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -1910,9 +1916,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.15':
     optional: true
 
-  '@playwright/test@1.49.0':
+  '@playwright/test@1.49.1':
     dependencies:
-      playwright: 1.49.0
+      playwright: 1.49.1
 
   '@react-aria/focus@3.18.4(react@18.3.1)':
     dependencies:
@@ -2173,7 +2179,7 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.2
 
-  '@types/node@22.10.1':
+  '@types/node@22.10.3':
     dependencies:
       undici-types: 6.20.0
 
@@ -3389,7 +3395,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.15
       '@swc/helpers': 0.5.5
@@ -3410,26 +3416,26 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 14.2.15
       '@next/swc-win32-ia32-msvc': 14.2.15
       '@next/swc-win32-x64-msvc': 14.2.15
-      '@playwright/test': 1.49.0
+      '@playwright/test': 1.49.1
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextra-theme-docs@3.2.5(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@3.2.5(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  nextra-theme-docs@3.3.1(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@3.3.1(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@headlessui/react': 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
-      next: 14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      nextra: 3.2.5(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
+      nextra: 3.3.1(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
       zod: 3.23.8
 
-  nextra@3.2.5(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2):
+  nextra@3.3.1(@types/react@18.3.3)(acorn@8.11.3)(next@14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.7
       '@headlessui/react': 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3452,10 +3458,11 @@ snapshots:
       mdast-util-gfm: 3.0.0
       mdast-util-to-hast: 13.2.0
       negotiator: 1.0.0
-      next: 14.2.15(@playwright/test@1.49.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.15(@playwright/test@1.49.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       p-limit: 6.1.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+      react-medium-image-zoom: 5.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rehype-katex: 7.0.0
       rehype-pretty-code: 0.14.0(shiki@1.22.2)
       rehype-raw: 7.0.0
@@ -3544,11 +3551,11 @@ snapshots:
       mlly: 1.7.2
       pathe: 1.1.2
 
-  playwright-core@1.49.0: {}
+  playwright-core@1.49.1: {}
 
-  playwright@1.49.0:
+  playwright@1.49.1:
     dependencies:
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -3572,6 +3579,11 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+
+  react-medium-image-zoom@5.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react@18.3.1:
     dependencies:
