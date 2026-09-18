@@ -1500,7 +1500,7 @@ dependencies = [
 
 [[package]]
 name = "kavita-import-tool"
-version = "0.1.26"
+version = "0.1.27"
 dependencies = [
  "chrono",
  "serde",
