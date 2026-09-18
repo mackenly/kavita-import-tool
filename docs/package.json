@@ -2,9 +2,15 @@
   "name": "nextra-docs-template",
   "version": "0.0.1",
   "description": "Nextra docs template",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "pages:build": "next build",
     "start": "next start",
     "e2e": "playwright test -c e2e/playwright.config.ts"
   },
@@ -19,9 +25,9 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
-    "next": "^14.1.1",
-    "nextra": "latest",
-    "nextra-theme-docs": "latest",
+    "next": "^14.2.21",
+    "nextra": "3.3.1",
+    "nextra-theme-docs": "3.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -1,4 +1,3 @@
-import exp from 'constants'
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -7,5 +6,8 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  // Your Next.js config
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
 })
