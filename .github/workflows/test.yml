@@ -24,16 +24,16 @@ jobs:
         timeout-minutes: 10
         # ignore if commit message contains chore or ci
         if: ${{ !contains(github.event.head_commit.message, 'ci:') && !contains(github.event.head_commit.message, 'chore:') }}
-        runs-on: ubuntu-latest
+        # Tauri 1.x links against webkit2gtk 4.0, which Ubuntu 24.04 (ubuntu-latest/noble) dropped.
+        runs-on: ubuntu-22.04
         steps:
             - uses: actions/checkout@v4
 
             - name: install dependencies (ubuntu only)
               run: |
                 sudo apt-get update
-                sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-                # webkitgtk 4.0 is for Tauri v1 - webkitgtk 4.1 is for Tauri v2.
-                # You can remove the one that doesn't apply to your app to speed up the workflow a bit.
+                sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+                # webkitgtk 4.0 is required for Tauri v1 (this app). webkitgtk 4.1 is Tauri v2-only.
 
             - name: Setup Rust
               uses: actions-rs/toolchain@v1
