@@ -83,7 +83,9 @@ jobs:
           git add src-tauri/tauri.conf.json
           git add package.json
           git commit -m "chore: release ${{ steps.versioning.outputs.newTag }}"
+          # cargo/npm can leave extra dirty files that block rebase
+          git status --short
+          git reset --hard HEAD
           git pull --rebase origin main
-          git push
           git tag -a ${{ steps.versioning.outputs.newTag }} -m "Release ${{ steps.versioning.outputs.newTag }}"
           git push --follow-tags
