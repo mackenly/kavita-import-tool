@@ -8,15 +8,26 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
+concurrency:
+  group: version-bump
+  cancel-in-progress: false
+
 jobs:
   version-bump:
     # Tauri 1.x links against webkit2gtk 4.0, which Ubuntu 24.04 (ubuntu-latest/noble) dropped.
     runs-on: ubuntu-22.04
     timeout-minutes: 5
-    # ignore if commit message contains chore or ci and make sure version bump job passed
-    if: ${{ github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+    # Skip chore/ci release commits so this job does not loop after it pushes.
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.workflow_run.head_commit.message, 'chore:') && !contains(github.event.workflow_run.head_commit.message, 'ci:') }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: install dependencies (ubuntu only)
         run: |
@@ -36,11 +47,14 @@ jobs:
         uses: phips28/gh-action-bump-version@master
         with:
             tag-prefix: 'v'
+            tag-suffix: ''
             patch-wording: 'bump-patch,fixes,Fixes,bugfix,Bugfix,patch,hotfix,Hotfix'
             minor-wording: 'bump-minor,adds,Adds,new'
             major-wording: 'bump-major,MAJOR,removes,Removes,delete,Delete'
             skip-commit: true
             skip-tag: true
+            skip-push: true
+            target-branch: main
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -69,10 +83,7 @@ jobs:
           git add src-tauri/tauri.conf.json
           git add package.json
           git commit -m "chore: release ${{ steps.versioning.outputs.newTag }}"
+          git pull --rebase origin main
           git push
-
-      - name: Commit and tag version
-        run: |
           git tag -a ${{ steps.versioning.outputs.newTag }} -m "Release ${{ steps.versioning.outputs.newTag }}"
           git push --follow-tags
-            
