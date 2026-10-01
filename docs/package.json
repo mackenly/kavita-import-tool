@@ -32,8 +32,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.2",
-    "@types/node": "22.10.3",
-    "typescript": "^5.4.5"
+    "@playwright/test": "^1.63.0",
+    "@types/node": "26.6.1",
+    "typescript": "^7.0.2"
   }
 }
